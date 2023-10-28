@@ -13,14 +13,13 @@
 #include "plugin.hpp"
 
 #include "stripper.h"
+#include "support.h"
 #include "icommandline.h"
-
-#include <string>
 
 #include <cstdio>
 #include <cstddef>
 
-static std::string g_mapname;
+static SourceHook::String g_mapname;
 static stripper_core_t stripper_core;
 static char game_path[256];
 static char stripper_path[256];

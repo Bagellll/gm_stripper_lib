@@ -14,8 +14,10 @@
 #ifndef _INCLUDE_SAMPLEPLUGIN_H
 #define _INCLUDE_SAMPLEPLUGIN_H
 
-#include "support.h"
 #include "metamod/defs.h"
+#include "metamod/sh_string.h"
+#include "metamod/sh_list.h"
+#include "metamod/sh_stack.h"
 
 class StripperPlugin : public ISmmPlugin
 {
