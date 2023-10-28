@@ -8,12 +8,14 @@
  * License: see LICENSE.TXT
  * ===================================
  */
+#pragma once
+
 #ifndef _INCLUDE_STRIP_PARSER_H
 #define _INCLUDE_STRIP_PARSER_H
 
-#include <sh_string.h>
-#include <sh_list.h>
-#include <sh_stack.h>
+#include "metamod/sh_string.h"
+#include "metamod/sh_list.h"
+#include "metamod/sh_stack.h"
 #include "pcre.h"
 
 struct CACHEABLE

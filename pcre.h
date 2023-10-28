@@ -39,6 +39,38 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef _PCRE_H
 #define _PCRE_H
 
+// edit, move defs from another file
+#define PCRE_CASELESS           0x00000001
+#define PCRE_MULTILINE          0x00000002
+#define PCRE_DOTALL             0x00000004
+#define PCRE_EXTENDED           0x00000008
+#define PCRE_ANCHORED           0x00000010
+#define PCRE_DOLLAR_ENDONLY     0x00000020
+#define PCRE_EXTRA              0x00000040
+#define PCRE_NOTBOL             0x00000080
+#define PCRE_NOTEOL             0x00000100
+#define PCRE_UNGREEDY           0x00000200
+#define PCRE_NOTEMPTY           0x00000400
+#define PCRE_UTF8               0x00000800
+#define PCRE_NO_AUTO_CAPTURE    0x00001000
+#define PCRE_NO_UTF8_CHECK      0x00002000
+#define PCRE_AUTO_CALLOUT       0x00004000
+#define PCRE_PARTIAL            0x00008000
+#define PCRE_DFA_SHORTEST       0x00010000
+#define PCRE_DFA_RESTART        0x00020000
+#define PCRE_FIRSTLINE          0x00040000
+#define PCRE_DUPNAMES           0x00080000
+#define PCRE_NEWLINE_CR         0x00100000
+#define PCRE_NEWLINE_LF         0x00200000
+#define PCRE_NEWLINE_CRLF       0x00300000
+#define PCRE_NEWLINE_ANY        0x00400000
+#define PCRE_NEWLINE_ANYCRLF    0x00500000
+#define PCRE_BSR_ANYCRLF        0x00800000
+#define PCRE_BSR_UNICODE        0x01000000
+#define PCRE_JAVASCRIPT_COMPAT  0x02000000
+#define PCRE_NO_START_OPTIMIZE  0x04000000
+#define PCRE_NO_START_OPTIMISE  0x04000000
+
 /* The current PCRE version information. */
 
 #define PCRE_MAJOR          7

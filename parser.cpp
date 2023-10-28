@@ -10,11 +10,16 @@
  */
 
 #include "pcre.h"
-#include <sh_stack.h>
-#include <ctype.h>
 #include "parser.h"
-#include <sh_string.h>
 #include "support.h"
+
+#include "metamod/sh_stack.h"
+#include "metamod/sh_string.h"
+
+#include <platform.h>
+
+#include <cctype>
+#include <cstring>
 
 using namespace SourceHook;
 

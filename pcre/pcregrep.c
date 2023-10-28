@@ -63,7 +63,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <bzlib.h>
 #endif
 
-#include "pcre.h"
+#include "../pcre.h"
 
 #define FALSE 0
 #define TRUE 1

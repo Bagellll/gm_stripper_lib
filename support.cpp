@@ -21,27 +21,10 @@
 #include <unistd.h>
 #endif
 
-Stripper g_Stripper;
-stripper_game_t stripper_game;
+#include <cstring>
 
-#if defined _WIN32
-char *strchrnul(const char *str, int c)
-{
-	while(*str)
-	{
-		if (c == *str) break;
-		str++;
-	}
-	return const_cast<char*>(str);
-}
-#define EXPORT extern "C" __declspec(dllexport)
-#elif defined __GNUC__
-#if __GNUC__ == 4
-#define EXPORT extern "C" __attribute__ ((visibility("default")))
-#else
-#define EXPORT extern "C"
-#endif
-#endif
+Stripper g_Stripper;
+extern stripper_game_t stripper_game;
 
 static const char*
 parse_map(const char* map, const char* entities)
@@ -181,7 +164,7 @@ static stripper_core_t stripper_core =
 	plugin_unload
 };
 
-EXPORT void
+void
 LoadStripper(const stripper_game_t* game, stripper_core_t* core)
 {
 	memcpy(&stripper_game, game, sizeof(stripper_game_t));

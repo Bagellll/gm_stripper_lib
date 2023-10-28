@@ -43,7 +43,7 @@
 #include <algorithm>
 
 #include "pcrecpp_internal.h"
-#include "pcre.h"
+#include "../pcre.h"
 #include "pcrecpp.h"
 #include "pcre_stringpiece.h"
 

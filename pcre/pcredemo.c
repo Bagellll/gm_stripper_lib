@@ -28,7 +28,7 @@ unwanted results. So in this environment, uncomment the following line. */
 
 #include <stdio.h>
 #include <string.h>
-#include <pcre.h>
+#include "../pcre.h"
 
 #define OVECCOUNT 30    /* should be a multiple of 3 */
 

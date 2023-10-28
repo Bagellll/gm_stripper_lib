@@ -56,7 +56,7 @@ supporting internal functions that are not used by other modules. */
 /* When DEBUG is defined, we need the pcre_printint() function, which is also
 used by pcretest. DEBUG is not defined when building a production library. */
 
-#ifdef DEBUG
+#ifdef PCRE_DEBUG
 #include "pcre_printint.src"
 #endif
 
@@ -2612,7 +2612,7 @@ BOOL utf8 = FALSE;
 uschar *utf8_char = NULL;
 #endif
 
-#ifdef DEBUG
+#ifdef PCRE_DEBUG
 if (lengthptr != NULL) DPRINTF((">> start branch\n"));
 #endif
 
@@ -2671,7 +2671,7 @@ for (;; ptr++)
 
   if (lengthptr != NULL)
     {
-#ifdef DEBUG
+#ifdef PCRE_DEBUG
     if (code > cd->hwm) cd->hwm = code;                 /* High water info */
 #endif
     if (code > cd->start_workspace + COMPILE_WORK_SIZE) /* Check for overrun */
@@ -6559,7 +6559,7 @@ if (reqbyte >= 0 &&
 /* Print out the compiled data if debugging is enabled. This is never the
 case when building a production library. */
 
-#ifdef DEBUG
+#ifdef PCRE_DEBUG
 
 printf("Length = %d top_bracket = %d top_backref = %d\n",
   length, re->top_bracket, re->top_backref);

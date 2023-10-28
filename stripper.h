@@ -8,17 +8,16 @@
  * License: see LICENSE.TXT
  * ===================================
  */
+
+#pragma once
+
 #ifndef _INCLUDE_SAMPLEPLUGIN_H
 #define _INCLUDE_SAMPLEPLUGIN_H
 
-#include <ISmmPlugin.h>
-#include <sh_string.h>
-#include <sh_list.h>
-#include <sh_stack.h>
+#include "support.h"
+#include "metamod/defs.h"
 
-class StripperPlugin : 
-    public ISmmPlugin, 
-    public IConCommandBaseAccessor
+class StripperPlugin : public ISmmPlugin
 {
 public:
     bool Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxlen, bool late);
@@ -35,30 +34,28 @@ public:
     const char *GetVersion();
     const char *GetDate();
     const char *GetLogTag();
-public:    //IConCommandBaseAccessor
-    bool RegisterConCommandBase(ConCommandBase *pVar);
 };
 
 PLUGIN_GLOBALVARS();
 
-#define    FIND_IFACE(func, assn_var, num_var, name, type) \
-    do { \
-        if ( (assn_var=(type)((ismm->func())(name, NULL))) != NULL ) { \
-            num_var = 0; \
-            break; \
-        } \
-        if (num_var >= 999) \
-            break; \
-    } while ( num_var=ismm->FormatIface(name, sizeof(name)-1) ); \
-    if (!assn_var) { \
-        if (error) \
-            snprintf(error, maxlen, "Could not find interface %s", name); \
-        return false; \
-    }
+struct LevelInit_Data_t
+{
+    const char* pMapName;
+    const char* pMapEntities;
+    const char* pOldLevel;
+    const char* pLandmarkName;
+    bool loadGame;
+    bool background;
+};
 
-
+// parent project will call into these functions for results.
 const char *GetMapEntitiesString_handler();
-bool LevelInit_handler(char const *pMapName, char const *pMapEntities, char const *c, char const *d, bool e, bool f);
+LevelInit_Data_t LevelInit_handler(char const *pMapName, char const *pMapEntities, char const *pOldLevel, char const *pLandmarkName, bool loadGame, bool background);
+void Stripper_SetCommandClient(int client);
+// ----------
+
 char *UTIL_ToLowerCase(const char *str);
+
+inline StripperPlugin g_Plugin;
 
 #endif //_INCLUDE_SAMPLEPLUGIN_H

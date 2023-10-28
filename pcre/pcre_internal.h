@@ -74,7 +74,7 @@ It turns out that the Mac Debugging.h header also defines the macro DPRINTF, so
 be absolutely sure we get our version. */
 
 #undef DPRINTF
-#ifdef DEBUG
+#ifdef PCRE_DEBUG
 #define DPRINTF(p) printf p
 #else
 #define DPRINTF(p) /* Nothing */
@@ -261,7 +261,7 @@ must begin with PCRE_. */
 /* Include the public PCRE header and the definitions of UCP character property
 values. */
 
-#include "pcre.h"
+#include "../pcre.h"
 #include "ucp.h"
 
 /* When compiling for use with the Virtual Pascal compiler, these functions
