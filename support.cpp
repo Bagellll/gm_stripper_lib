@@ -170,31 +170,3 @@ LoadStripper(const stripper_game_t* game, stripper_core_t* core)
 	memcpy(&stripper_game, game, sizeof(stripper_game_t));
 	memcpy(core, &stripper_core, sizeof(stripper_core_t));
 }
-
-/* Overload a few things to prevent libstdc++ linking */
-#if defined __linux__ || defined __APPLE__
-extern "C" void __cxa_pure_virtual(void)
-{
-}
-
-void* operator new(size_t size)
-{
-	return malloc(size);
-}
-
-void* operator new[](size_t size)
-{
-	return malloc(size);
-}
-
-void operator delete(void* ptr)
-{
-	free(ptr);
-}
-
-void operator delete[](void* ptr)
-{
-	free(ptr);
-}
-#endif
-

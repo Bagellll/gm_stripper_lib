@@ -26,10 +26,6 @@ static char game_path[256];
 static char stripper_path[256];
 static char stripper_cfg_path[256];
 
-// SH_DECL_HOOK0(IVEngineServer, GetMapEntitiesString, SH_NOATTRIB, 0, const char *);
-// SH_DECL_HOOK6(IServerGameDLL, LevelInit, SH_NOATTRIB, 0, bool, char const *, char const *, char const *, char const *, bool, bool);
-// SH_DECL_HOOK1_void(IServerGameClients, SetCommandClient, SH_NOATTRIB, 0, int);
-
 static void
 log_message(const char* fmt, ...)
 {
@@ -110,18 +106,7 @@ StripperPlugin::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxlen, boo
         stripper_game.stripper_path = stripper_path;
     }
 
-    char path[256];
-    g_SMAPI->PathFormat(path,
-            sizeof(path),
-            "%s/%s/bin/stripper.core.so",
-            game_path,
-            stripper_game.stripper_path);
-
     LoadStripper(&stripper_game, &stripper_core);
-
-    // SH_ADD_HOOK_STATICFUNC(IVEngineServer, GetMapEntitiesString, engine, GetMapEntitiesString_handler, false);
-    // SH_ADD_HOOK_STATICFUNC(IServerGameDLL, LevelInit, gamedll, LevelInit_handler, false);
-    // SH_ADD_HOOK_STATICFUNC(IServerGameClients, SetCommandClient, clients, SetCommandClient, false);
 
     return true;
 }
@@ -129,10 +114,6 @@ StripperPlugin::Load(PluginId id, ISmmAPI *ismm, char *error, size_t maxlen, boo
 bool
 StripperPlugin::Unload(char *error, size_t maxlen)
 {
-    // SH_REMOVE_HOOK_STATICFUNC(IVEngineServer, GetMapEntitiesString, engine, GetMapEntitiesString_handler, false);
-    // SH_REMOVE_HOOK_STATICFUNC(IServerGameDLL, LevelInit, gamedll, LevelInit_handler, false);
-    // SH_REMOVE_HOOK_STATICFUNC(IServerGameClients, SetCommandClient, clients, SetCommandClient, false);
-
     stripper_core.unload();
 
     return true;
@@ -141,7 +122,6 @@ StripperPlugin::Unload(char *error, size_t maxlen)
 const char*
 GetMapEntitiesString_handler()
 {
-    // RETURN_META_VALUE(MRES_SUPERCEDE, stripper_core.ent_string());
     return stripper_core.ent_string();
 }
 
@@ -163,9 +143,8 @@ LevelInit_handler(char const *pMapName, char const *pMapEntities, char const *pO
     stripper_curfile.SetValue(g_mapname.c_str());
 
     const char *ents = stripper_core.parse_map(g_mapname.c_str(), pMapEntities);
-    // RETURN_META_VALUE_NEWPARAMS(MRES_IGNORED, true, &IServerGameDLL::LevelInit, (pMapName, ents, pOldLevel, pLandmarkName, loadGame, background));
 
-    const LevelInit_Data_t data
+    return LevelInit_Data_t
     {
         pMapName,
         ents,
@@ -174,8 +153,6 @@ LevelInit_handler(char const *pMapName, char const *pMapEntities, char const *pO
         loadGame,
         background
     };
-
-    return data;
 }
 
 char*
